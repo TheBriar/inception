@@ -5,7 +5,8 @@ FROM debian:buster
 EXPOSE 3306
 
 # install mariadb server and client
-RUN apt-get update && apt-get install -y mariadb-server mariadb-client
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y mariadb-server mariadb-client
 
 #create directory to store our setup.sql and copy it
 RUN mkdir /mariadbscript

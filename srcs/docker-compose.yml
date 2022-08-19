@@ -28,16 +28,16 @@ services:
     networks:
       - frontend
 
-  nginx:
-    container_name: nginx
-    depends_on:
-      - wordpress
-    build: ./nginx/
-    volumes: 
-    - volume-wordpress:/var/lib/wordpress:ro #make volume readonly, idk if i should do this
-    restart: unless-stopped
-    networks:
-      - frontend
+  # nginx:
+  #   container_name: nginx
+  #   depends_on:
+  #     - wordpress
+  #   build: ./nginx/
+  #   volumes: 
+  #   - volume-wordpress:/var/lib/wordpress:ro #make volume readonly, idk if i should do this
+  #   restart: unless-stopped
+  #   networks:
+  #     - frontend
 
 networks:
   frontend:
