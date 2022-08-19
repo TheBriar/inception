@@ -1,0 +1,23 @@
+# run on latest debian version
+FROM debian:buster
+
+#expose mysql port to other containers
+EXPOSE 3306
+
+# install mariadb server and client
+RUN apt-get update && apt-get install -y mariadb-server mariadb-client
+
+#create directory to store our setup.sql and copy it
+RUN mkdir /mariadbscript
+COPY setup.sql /mariadbscript/
+
+#start service with setup file
+RUN service mysql start && mariadb -u root < /mariadbscript/setup.sql
+
+# edit bind addres to allow external connections
+RUN sed -i 's/bind-address/bind-address = 0.0.0.0 #/i' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+#metadata about the image
+LABEL description="MariaDB Server"
+
+CMD ["mysqld"]
