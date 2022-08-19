@@ -1,0 +1,10 @@
+FROM debian:buster
+
+RUN apt update && apt upgrade -y
+RUN apt install php-fpm -y
+RUN apt install wget -y
+
+RUN mkdir /var/www/html/wordpress
+
+RUN wget http://wordpress.org/latest.tar.gz
+RUN tar xfz latest.tar.gz --strip-components=1 -C /var/www/html/wordpress/
