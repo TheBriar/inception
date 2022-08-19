@@ -10,12 +10,10 @@ up:
 down: 
 	docker-compose -f $(COMPOSE) down 
 
-re: 
-	docker kill $(shell docker ps -q)
-	docker rm $(shell docker ps -a -q)
-	docker rmi $(shell docker images -q)
-	docker volume rm $(shell docker volume ls -q)
-	rm -rf $(HOME)/data/
-	$(MAKE) up
+clean: 
+	docker-compose -f $(COMPOSE) down --rmi all -v --remove-orphans
 
-.PHONY: up down re
+re: clean 
+	docker-compose -f $(COMPOSE) up -d --build --remove-orphans --force-recreate
+
+.PHONY: up down re clean
