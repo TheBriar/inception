@@ -25,26 +25,26 @@ services:
     volumes: 
       - volume-wordpress:/var/lib/wordpress
     restart: unless-stopped
-    ports:
-      - 8080:80
     environment:
       - WORDPRESS_DB_NAME=wordpress
-      - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=reguser
       - WORDPRESS_DB_PASSWORD=regpassword
     networks:
       - frontend
 
-  # nginx:
-  #   container_name: nginx
-  #   depends_on:
-  #     - wordpress
-  #   build: ./nginx/
-  #   volumes: 
-  #   - volume-wordpress:/var/lib/wordpress:ro #make volume readonly, idk if i should do this
-  #   restart: unless-stopped
-  #   networks:
-  #     - frontend
+  nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
+    build: ./nginx/
+    ports:
+      - 8080:80
+    volumes: 
+    - volume-wordpress:/var/lib/wordpress
+    restart: unless-stopped
+    networks:
+      - frontend
 
 
 volumes:
