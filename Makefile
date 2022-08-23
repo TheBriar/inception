@@ -12,6 +12,7 @@ down:
 
 clean: 
 	docker-compose -f $(COMPOSE) down --rmi all -v --remove-orphans
+	docker system prune --force --volumes
 
 re: clean 
 	docker-compose -f $(COMPOSE) up -d --build --remove-orphans --force-recreate

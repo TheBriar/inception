@@ -1,12 +1,10 @@
 # run on latest debian version
 FROM debian:buster
 
-#expose mysql port to other containers
-EXPOSE 3306
-
 # install mariadb server and client
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y mariadb-server mariadb-client
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    mariadb-server
 
 #create directory to store our setup.sql and copy it
 RUN mkdir /mariadbscript
