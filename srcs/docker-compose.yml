@@ -41,8 +41,7 @@ services:
       - wordpress
     build: ./nginx/
     ports:
-      - 8080:80   #map port 8080 on local machine to port 80 in container
-      - 443:443
+      - 80:80   #map port 8080 on local machine to port 80 in container
     volumes: 
     - volume-wordpress:/var/www/html
     restart: unless-stopped

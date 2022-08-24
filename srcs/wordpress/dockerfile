@@ -13,11 +13,14 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-COPY php-fpm.conf /etc/php7/php-fpm.conf
-COPY www.conf /etc/php7/php-fpm.d/www.conf
+RUN mkdir -p /run/php
+
+COPY php-fpm.conf /etc/php/7.3/php-fpm.conf
+COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 WORKDIR /var/www/html/wordpress
 
 #copy setup script into container and run it
 COPY conf.sh /tmp/configure.sh
+# CMD [ "sleep", "infinity" ]
 ENTRYPOINT [ "sh", "/tmp/configure.sh" ]
