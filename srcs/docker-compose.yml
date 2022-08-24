@@ -23,13 +23,15 @@ services:
       - mariadb  #needs this to be running to run itself
     build: ./wordpress/
     volumes: 
-      - volume-wordpress:/var/lib/wordpress
+      - volume-wordpress:/var/www/html
     restart: unless-stopped
     environment:
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=reguser
       - WORDPRESS_DB_PASSWORD=regpassword
+    ports:
+      - 9000:9000
     networks:
       - frontend
 
@@ -40,8 +42,9 @@ services:
     build: ./nginx/
     ports:
       - 8080:80   #map port 8080 on local machine to port 80 in container
+      - 443:443
     volumes: 
-    - volume-wordpress:/var/lib/wordpress
+    - volume-wordpress:/var/www/html
     restart: unless-stopped
     networks:
       - frontend

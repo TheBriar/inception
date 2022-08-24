@@ -2,8 +2,7 @@
 FROM debian:buster
 
 # install mariadb server and client
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     mariadb-server
 
 #create directory to store our setup.sql and copy it
