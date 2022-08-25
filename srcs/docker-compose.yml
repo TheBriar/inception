@@ -10,8 +10,6 @@ services:
     restart: unless-stopped 
     volumes: 
       - volume-mariadb:/var/lib/mysql #use this volume
-    environment:
-      - MARIADB_ROOT_PASSWORD=secure_password; #set env variables
     networks:
       - frontend  #networks it can be found on
     expose:
@@ -44,7 +42,7 @@ services:
       - wordpress
     build: ./nginx/
     ports:
-      - 80:80   #map port 8080 on local machine to port 80 in container
+      - 80:80   #map port 80 on local machine to port 80 in container
       - 443:443
     volumes: 
     - volume-wordpress:/var/www/html
