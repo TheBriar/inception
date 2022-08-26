@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS wordpress;
 
-SET PASSWORD FOR 'reguser'@'%' = PASSWORD("securepassword");
+SET PASSWORD FOR 'root'@'%' = PASSWORD("securepassword");
 
 
 CREATE USER 'reguser'@'%';
