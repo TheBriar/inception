@@ -16,5 +16,8 @@ clean:
 
 re: clean 
 	docker-compose -f $(COMPOSE) up -d --build --remove-orphans --force-recreate
+	
+vm:
+	echo "127.0.0.1		pvan-dij.42.fr" >> /etc/hosts
 
-.PHONY: up down re clean
+.PHONY: up down re clean vm
